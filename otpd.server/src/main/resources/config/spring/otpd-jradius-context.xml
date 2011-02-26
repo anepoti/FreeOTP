@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans
+    PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>file:${otp-server-configDir}/otp/properties/otp.properties</value>
+			</list>
+		</property>
+		<property name="ignoreUnresolvablePlaceholders" value="false" />
+	</bean>
+
+	<import resource="classpath*:config/spring/otp-business-context.xml" />
+
+
+	<bean id="attributeDictionary" class="net.jradius.dictionary.AttributeDictionaryImpl" />
+
+	<bean id="radiusProcessor" class="net.jradius.freeradius.FreeRadiusProcessor"
+		singleton="false" />
+
+	<bean id="radiusListener" class="net.jradius.freeradius.FreeRadiusListener" />
+
+	<bean id="cacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:config/jradius/cache/${otp-server-cache-config}" />
+		<property name="shared" value="true"/>
+	</bean>
+
+	<bean id="sessionFactory" class="net.jradius.session.RadiusSessionFactory">
+	</bean>
+
+	<bean id="sessionKeyProvider" class="net.jradius.session.RadiusSessionKeyProvider">
+	</bean>
+
+	<bean id="sessionManager" class="net.jradius.session.JRadiusSessionManager">
+		<property name="cacheManager">
+			<ref bean="cacheManager" />
+		</property>
+	</bean>
+
+
+	<bean id="jRadiusManager" class="net.jradius.impl.JRadiusManagerImpl"
+		destroy-method="destroy">
+		<property name="configFile">
+			<value>config/jradius/jradius-config.xml</value>
+		</property>
+		<property name="startOnLoad">
+			<value>true</value>
+		</property>
+	</bean>
+
+	<bean id="ehCacheMBeanRegistration"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod"
+			value="net.sf.ehcache.management.ManagementService.registerMBeans" />
+		<property name="arguments">
+			<list>
+				<ref bean="cacheManager" />
+				<ref bean="mbeanServer" />
+				<value>true</value>
+				<value>true</value>
+				<value>true</value>
+				<value>true</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
+		<property name="locateExistingServerIfPossible" value="true" />
+	</bean>
+
+	<bean id="mbeanExporter" class="org.springframework.jmx.export.MBeanExporter">
+		<property name="server" ref="mbeanServer" />
+	</bean>
+
+</beans>

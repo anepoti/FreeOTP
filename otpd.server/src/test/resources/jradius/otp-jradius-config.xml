@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans
+    PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+  <bean id="attributeDictionary" class="net.jradius.dictionary.AttributeDictionaryImpl" />
+
+  <bean id="radiusProcessor" class="net.jradius.freeradius.FreeRadiusProcessor" singleton="false" />
+
+  <bean id="radiusListener" class="net.jradius.freeradius.FreeRadiusListener" />
+
+  <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <property name="configLocation" value="classpath:jradius/ehcache.xml"/>
+  </bean>
+  
+  <bean id="otpListener" class="net.jradius.webservice.WebServiceListener">
+    <property name="cacheManager"><ref bean="cacheManager"/></property>
+    <property name="cacheName"><value>otpRequests</value></property>
+  </bean>
+  
+  <bean id="webServiceListener" class="net.jradius.webservice.WebServiceListener" singleton="false">
+    <property name="cacheManager"><ref bean="cacheManager"/></property>
+  </bean>
+  
+  <bean id="otpProcessor" class="net.jradius.webservice.OTPProxyProcessor" singleton="false" />
+  
+  <bean id="sessionFactory" class="net.jradius.session.RadiusSessionFactory">
+  </bean>
+  
+  <bean id="sessionKeyProvider" class="net.jradius.session.RadiusSessionKeyProvider">
+  </bean>
+  
+  <bean id="sessionManager" class="net.jradius.session.JRadiusSessionManager">
+    <property name="cacheManager"><ref bean="cacheManager"/></property>
+  </bean>
+
+<!--
+<bean id="radSecProcessor" class="net.jradius.radsec.RadSecProcessor" singleton="false">
+</bean>
+
+<bean id="radSecListener" class="net.jradius.radsec.RadSecListener">
+</bean>
+
+<bean id="radSecKeyManager" class="net.jradius.radsec.SimpleKeyManager">
+  <property name="keyFile" value="/tmp/server.pem"/>
+  <property name="keyFileType" value="PEM"/>
+  <property name="keyFilePassword" value="test"/>
+</bean>
+
+<bean id="radSecTrustManager" class="net.jradius.radsec.SimpleTrustManager">
+  <!- -property name="trustAll" value="true"/- fix or remote comment ->
+  <property name="certFile" value="/tmp/ca.pem"/>
+  <property name="certFileType" value="PEM"/>
+  <property name="certFilePassword" value=""/>
+</bean>
+
+<bean id="radSecProxyHandler" class="net.jradius.radsec.SimpleProxyHandler">
+  <property name="radiusServer" value="localhost"/>
+  <property name="sharedSecret" value="testing123"/>
+  <property name="authPort" value="1645"/>
+  <property name="acctPort" value="1646"/>
+</bean>
+-->
+  
+  <bean id="jRadiusManager" class="net.jradius.impl.JRadiusManagerImpl" destroy-method="destroy">
+    <property name="configFile"><value>jradius/jradius-config.xml</value></property>
+    <property name="startOnLoad"><value>true</value></property>
+  </bean>
+  
+</beans>

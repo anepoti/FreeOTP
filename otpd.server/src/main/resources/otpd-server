@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# otpd.business.server        
+#
+# chkconfig: 
+# description:  Start up the Otpd server engine.
+
+RETVAL=$?
+
+OTPD_SERVER_HOME=`dirname $0`
+
+case "$1" in
+ start)
+        if [ -f $OTPD_SERVER_HOME/bin/startup.sh ];
+          then
+            echo $"Starting otpd.business server"
+            $OTPD_SERVER_HOME/bin/startup.sh
+        fi
+        ;;
+ stop)
+        if [ -f $OTPD_SERVER_HOME/bin/shutdown.sh ];
+          then
+            echo $"Stopping otpd.business server"
+            $OTPD_SERVER_HOME/bin/shutdown.sh
+        fi
+        ;;
+ *)
+        echo $"Usage: $0 {start|stop}"
+        exit 1
+        ;;
+esac
+
+exit $RETVAL

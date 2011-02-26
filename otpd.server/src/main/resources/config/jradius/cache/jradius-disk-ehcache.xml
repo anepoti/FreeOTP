@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+
+	<diskStore path="${otp-server-cache-persistence-disk-path}" />
+
+	<defaultCache maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+		diskPersistent="true" diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU" />
+
+
+	<cache name="jradius-session" maxElementsInMemory="1000" eternal="true"
+		overflowToDisk="true" diskPersistent="true"
+		diskExpiryThreadIntervalSeconds="120" />
+
+</ehcache>
