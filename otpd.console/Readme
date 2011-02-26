@@ -1,0 +1,7 @@
+Add the following to enable remote debug :
+
+export MAVEN_OPTS='-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n'
+
+append : -Dcom.sun.management.jmxremote to enable JMX
+
+append : -Xms256m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=128m to avoid memory errors

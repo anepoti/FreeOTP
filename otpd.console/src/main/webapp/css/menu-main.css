@@ -1,0 +1,110 @@
+body {
+	font-family:"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif;
+	margin: 10px;
+}
+
+.wrapper .text {
+	font-family:"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif;
+	padding-top: 50px;
+}
+
+.wrapper h1 {
+	font-family:"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif;
+	font-size: 26px;
+}
+
+.longText {
+	margin-top: 20px;
+	width: 600px;
+	font: 18px/ 24px "Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif;
+	color: gray;
+}
+
+span.btn {
+	padding: 10px;
+	display: inline-block;
+	cursor: pointer;
+	font: 12px/ 14px "Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif;
+	color: #aaa;
+	background-color: #eee;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-box-shadow: #999 2px 0px 3px;
+	-webkit-box-shadow: #999 2px 0px 3px;
+}
+
+span.btn:hover {
+	background-color: #000;
+}
+
+/*
+    custom style for extruder
+    */
+.extruder.left.a .flap {
+	font-size: 18px;
+	color: white;
+	top: 0;
+	padding: 10px 0px 10px 10px;
+	background: #772B14;
+	width: 30px;
+	position: absolute;
+	right: 0px;
+	-moz-border-radius: 0 10px 10px 0;
+	-webkit-border-top-right-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-box-shadow: #666 2px 0px 3px;
+	-webkit-box-shadow: #666 2px 0px 3px;
+}
+
+.extruder.left.a .content {
+	border-right: 3px solid #772B14;
+}
+
+.extruder.top .optionsPanel .panelVoice a:hover {
+	color: #fff;
+	background: url("elements/black_op_30.png");
+	border-bottom: 1px solid #000;
+}
+
+.extruder.top .optionsPanel .panelVoice a {
+	border-bottom: 1px solid #000;
+}
+
+.extruder.left.a .flap .flapLabel {
+	background: #772B14;
+}
+
+.wrapper {
+	font-family:"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif;
+	margin-left: -32px;
+	margin-top: 25px;
+}
+
+.wrapper h1 {
+	font-family:"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif;
+	font-size: 26px;
+}
+
+button {
+	padding: 4px;
+	display: inline-block;
+	cursor: pointer;
+	font: 12px/ 14px "Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif;
+	color: #666;
+	border: 1px solid #999;
+	background-color: #eee;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-box-shadow: #999 2px 0px 3px;
+	-webkit-box-shadow: #999 2px 0px 3px;
+	margin-bottom: 4px;
+}
+
+button:hover {
+	color: #aaa;
+	background-color: #000;
+}
+
+:focus {
+	outline: 0;
+}

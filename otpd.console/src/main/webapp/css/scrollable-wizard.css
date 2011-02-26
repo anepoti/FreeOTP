@@ -1,0 +1,177 @@
+/* title */
+#content h1 {
+	font-size: 18px;
+	font-weight: normal;
+}
+
+/* scrollable root element */
+#wizard {
+	border: 3px double #789;
+	font-size: 10px;
+	height: 487px;
+	margin: 20px auto;
+	width: 589px;
+	overflow: hidden;
+	position: relative;
+	/* rounded corners for modern browsers */
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+/* scrollable items */
+#wizard .items {
+	width: 20000em;
+	clear: both;
+	position: absolute;
+}
+
+/* single item */
+#wizard .page {
+	float: left;
+	padding: 9px 30px;
+	width: 503px;
+}
+
+}
+/* title */
+#wizard h2 {
+	border-bottom: 1px dotted #ccc;
+	font-size: 22px;
+	font-weight: normal;
+	margin: 10px 0 0 0;
+	padding-bottom: 15px;
+}
+
+#wizard h2 em {
+	display: block;
+	font-size: 14px;
+	color: #666;
+	font-style: normal;
+	margin-top: 5px;
+}
+
+/* input fields */
+#wizard ul {
+	padding: 0px !important;
+	margin: 0px !important;
+}
+
+#wizard li {
+	list-style-type: none;
+	list-style-image: none;
+	margin-bottom: 25px;
+}
+
+#wizard label {
+	font-size: 14px;
+	display: block;
+}
+
+#wizard label strong {
+	color: #789;
+	position: relative;
+	top: -1px;
+}
+
+#wizard label em {
+	font-size: 11px;
+	color: #666;
+	font-style: normal;
+}
+
+#wizard .text {
+	color: #445566;
+	letter-spacing: 0;
+	padding: 5px;
+	width: 100%;
+	font-family: "Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif;
+}
+
+#wizard select {
+	border: 1px solid #ccc;
+	width: 94%;
+	padding: 4px;
+}
+
+#wizard label span {
+	color: #8E3A3A;
+	font-weight: bold;
+	position: relative;
+	top: 4px;
+	font-size: 20px;
+}
+
+#wizard .double label {
+	width: 50%;
+	float: left;
+}
+
+#wizard .double .text {
+	width: 93%;
+}
+
+#wizard .clearfix {
+	clear: left;
+	padding-top: 10px;
+}
+
+#wizard .right {
+	float: right;
+}
+
+#wizard button {
+	-moz-border-radius: 10px 10px 10px 10px;
+	-moz-box-shadow: 0 0 3px #AAAAAA;
+	background: none repeat scroll 0 0 #000000;
+	clear: none;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	font-family: "Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif;
+	font-size: 11px;
+	font-weight: inherit;
+	margin: 0 auto;
+	outline: medium none;
+	padding: 2px 25px;
+	text-shadow: 0 1px 1px #777777;
+}
+
+/* validation error message bar */
+#drawer {
+	_background-color: #fff;
+	overflow: visible;
+	position: fixed;
+	left: 0;
+	top: 0;
+	text-align: center;
+	padding: 15px;
+	font-size: 18px;
+	border-bottom: 2px solid #789;
+	width: 100%;
+	display: none;
+	z-index: 2;
+}
+
+#wizard .error {
+	border: 1px solid red;
+}
+
+#wizard #status {
+	height: 37px;
+	margin: 0 !important;
+	padding-left: 15px !important;
+	background: none repeat-x scroll 0 0 #112233
+}
+
+#status li {
+	list-style-type: none;
+	list-style-image: none;
+	float: left;
+	color: #fff;
+	padding: 12px 30px;
+}
+
+#status li.active {
+	background: url("../images/red_op_50.png");
+	font-weight: normal;
+}

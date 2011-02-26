@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OTPD User provisioning</title>
+	
+	<!-- include the Tools -->
+	<script src="scripts/jquery.tools.min.js"></script>
+	<script src="scripts/wizard-sliding.js"></script>
+	<script src="scripts/register.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="css/scrollable-wizard.css"/>
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.6.custom.css"/>
+	
+	
+</head>
+
+<body>
+ 
+<div id="dialog-message" title="Provisioning"></div>
+ 
+<!-- twitter style notification bar for validation errors -->
+<div id="drawer">Please fill in the empty fields marked with a 
+	<samp style="color:red">red</samp> border.
+</div>
+
+<div id="content">
+  <center><h1>OTPD Provisioning Wizard</h1></center>
+  <!-- the form -->
+  <form id="formElem"  name="formElem" action="">
+    <div id="wizard">
+    
+		<ul id="status">
+			<li class="active"><strong>1.</strong> Create Account</li>
+			<li><strong>2.</strong> Contact Details</li>
+			<li><strong>3.</strong> Token Settings</li>
+			<li><strong>4.</strong> Finalize</li>
+		</ul>
+
+		<div class="items">
+
+			<!-- page1 -->
+			<div class="page">
+
+				<h2>
+					<strong>Step 1: </strong>Account
+					<em>Please enter your login information:</em>
+				</h2>
+
+				<ul>
+					<!-- email -->
+					<li class="required">
+						<label>
+							<strong>1.</strong> Enter Your Email Address <span>*</span><br />
+							<input id="email" type="email" class="text" name="email"/>
+						</label>
+
+					</li>
+
+					<!-- username -->
+					<li class="required">
+						<label>
+							<strong>2.</strong> Pick a username <span>*</span><br />
+							<input id="commoname" type="text" class="text" name="commoname"/>
+							<em>Your preferred username to be used when logging in.</em>
+						</label>
+					</li>
+
+					<li class="clearfix">
+						<button type="button" class="next right">Proceed &raquo;</button>
+					</li>
+				</ul>
+
+			</div>
+
+			<!-- page2 -->
+			<div class="page">
+
+				<h2>
+					<strong>Step 2: </strong> Contact Details <b></b>
+				</h2>
+
+				<ul>
+
+					<!-- givenname -->
+					<li class="required">
+						<label>
+							<strong>1.</strong> Enter Your Given Name <span>*</span><br />
+							<input id="name" type="text" class="text" name="name" />
+							<em><strong>Example</strong>: Mihir</em>
+						</label>
+					</li>
+
+					<!-- lastname -->
+					<li class="required">
+						<label>
+							<strong>2.</strong> Enter Your Last Name <span>*</span><br />
+							<input id="surname" class="text" name="surname" />
+							<em><strong>Example</strong>: Bellare</em>
+						</label>
+					</li>
+
+					<li class="clearfix">
+						<button type="button" class="prev" style="float:left">&laquo; Back</button>
+						<button type="button" class="next right">Proceed &raquo;</button>
+					</li>
+
+					<br clear="all" />
+				</ul>
+
+			</div>
+
+			<!-- page3 -->
+			<div class="page">
+
+				<h2>
+					<strong>Step 3: </strong> Token Settings <b></b>
+				</h2>
+					<!-- model -->
+					<li class="required">
+						<label>
+							<strong>1.</strong> Enter the key decimals <span>*</span><br />
+							<select id="otpmodel" name="otpmodel">
+                                    <option value="d6" selected>d6</option>
+                                    <option value="d8">d8</option>
+                             </select>
+						</label>
+					</li>
+					
+					<!-- vendor -->
+					<li class="required">
+						<label>
+							<strong>2.</strong> Enter the algorithm  <span>*</span><br />
+							<select id="otpvendor" name="otpvendor">
+                                    <option value="hotp" selected>hotp</option>
+                                    <option value="totp">totp</option>
+                             </select>
+						</label>
+					</li>
+			
+					<!-- serial -->
+					<li>
+						<label>
+							<strong>3.</strong> Enter the Token Serial <br />
+							<input id="otpserial" type="text" class="text" name="otpserial" />
+						</label>
+					</li>
+
+					<!-- otpkey1 -->
+					<li class="required">
+						<label>
+							<strong>4.</strong> Enter the Token SharedKey <span>*</span><br />
+							<input id="otpkey1" class="text" name="otpkey1" />
+						</label>
+					</li>
+
+					<li class="clearfix">
+						<button type="button" class="prev" style="float:left">&laquo; Back</button>
+						<button type="button" class="next right">Proceed &raquo;</button>
+					</li>
+
+					<br clear="all" />
+				</ul>
+
+			</div>
+			
+			<!-- page4 -->
+			<div class="page">
+			
+				<h2>
+					<strong>Step 4: </strong> Congratulations! <b></b>
+				</h2>
+				<li class="clearfix">
+					<button type="button" class="prev">&laquo; Back</button>
+				    <button id="registerButton" type="submit">Register</button>
+                </li>
+			</div>
+		
+		</div><!--items-->
+	  </div><!--wizard-->
+	 </form>
+	</div><!--content-->
+ </body>
+</html>

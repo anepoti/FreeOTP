@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>OTPD User provisioning</title>
+<!-- include the Tools -->
+<script src="scripts/jquery.tools.min.js"></script>
+<script src="scripts/wizard-sliding.js"></script>
+<script src="scripts/synch.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/scrollable-wizard.css" />
+</head>
+
+<body>
+
+<!-- twitter style notification bar for validation errors -->
+<div id="drawer">Please fill in the empty fields marked with a <samp
+	style="color: red">red</samp> border.</div>
+
+<div id="content">
+<center>
+<h1>OTPD Token Synch Wizard</h1>
+</center>
+<!-- the form -->
+<form id="formElem" name="formElem" action="" method="get">
+<div id="wizard">
+
+<ul id="status">
+	<li class="active"><strong>1.</strong> Find Account</li>
+	<li><strong>2.</strong> Token Synch</li>
+	<li><strong>3.</strong> Finalize</li>
+</ul>
+
+<div class="items"><!-- page1 -->
+<div class="page">
+
+<h2><strong>Step 1: </strong>Account <em>Please enter your login information:</em></h2>
+
+<ul>
+	<!-- username -->
+	<li class="required"><label> <strong>1.</strong> Insert a
+	username <span>*</span><br />
+	<input id="commoname" type="text" class="text" name="commoname" /> </label></li>
+	<li><label> <strong>2.</strong> First Name<br />
+	<input id="firtsName" type="text" class="text" name="firtsName" /> </label></li>
+
+	<li class="clearfix">
+	<button type="button" class="next right">Proceed &raquo;</button>
+	<button id="searchButton" type="button">Feed &raquo;</button>
+	</li>
+</ul>
+
+</div>
+
+<!-- page2 -->
+<div class="page">
+
+<h2><strong>Step 2: </strong> Token Synch<b></b></h2>
+
+<ul>
+
+	<!-- password1 -->
+	<li class="required"><label> <strong>1.</strong> Enter the
+	first generated password <span>*</span><br />
+	<input id="otppassword1" type="text" class="text" name="password1" />
+	</label></li>
+	<!-- password2 -->
+	<li class="required"><label> <strong>2.</strong> Enter the
+	second generated password <span>*</span><br />
+	<input id="otppassword2" type="text" class="text" name="password2" />
+	</label></li>
+
+	<li class="clearfix">
+	<button type="button" class="prev" style="float: left">&laquo;
+	Back</button>
+	<button type="button" class="next right">Proceed &raquo;</button>
+	</li>
+
+	<br clear="all" />
+</ul>
+
+</div>
+<!-- page3 -->
+<div class="page">
+
+<h2><strong>Step 3: </strong> Synchronize <b></b></h2>
+<li class="clearfix">
+<button type="button" class="prev">&laquo; Back</button>
+<button id="synchButton" type="submit">Synchronize</button>
+</li>
+</div>
+
+</div>
+<!--items--></div>
+<!--wizard--></form>
+</div>
+<!--content-->
+<div id="synchReport" class="outputTextArea"></div>
+</body>
+</html>
