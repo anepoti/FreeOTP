@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>otpd.cas</artifactId>
+	<packaging>war</packaging>
+	<name>${project.artifactId}-${project.version}</name>
+
+	<parent>
+		<artifactId>otpd.module</artifactId>
+		<groupId>otpd</groupId>
+		<version>1.0</version>
+	</parent>
+
+	<properties>
+		<cas-version>3.3.4</cas-version>
+	</properties>
+
+	<description>The OTPD's customizations to the JA-SIG CAS server.</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.jasig.cas</groupId>
+			<artifactId>cas-server-webapp</artifactId>
+			<version>${cas-version}</version>
+			<type>war</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jasig.cas</groupId>
+			<artifactId>cas-server-core</artifactId>
+			<version>${cas-version}</version>
+		</dependency>
+
+		<!-- LDAP handler -->
+		<dependency>
+			<groupId>org.jasig.cas</groupId>
+			<artifactId>cas-server-support-ldap</artifactId>
+			<version>${cas-version}</version>
+		</dependency>
+
+		<!-- Radius handler -->
+		<dependency>
+			<groupId>org.jasig.cas</groupId>
+			<artifactId>cas-server-support-radius</artifactId>
+			<version>${cas-version}</version>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<finalName>cas</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>RELEASE</version>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<!-- Instructing external properties access -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0-alpha-1</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<files>
+								<file>../otpd.environment.filters/${env}/otpd-modules-${env}.properties</file>
+							</files>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Instructing resources filtering -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<!-- specify UTF-8, ISO-8859-1 or any other file encoding -->
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!-- Instructing the resources plugin to filter certain directories -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<filtering>true</filtering>
+							<directory>${cas-project-path}/src/main/webapp</directory>
+							<includes>
+								<include>**/*.properties</include>
+								<include>**/*.xml</include>
+								<include>**/*.jsp</include>
+								<!-- include any other file types you want to filter -->
+							</includes>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
+
