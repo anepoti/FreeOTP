@@ -1,0 +1,14 @@
+-------------------------------------
+FreeOTP OATH OneTimePassword Solution
+-------------------------------------
+
+FreeOTP OATH OneTimePassword Solution is a standard HMAC-Based One-Time Password (HOTP) suite for enhanced
+security.
+ 
+It is a simple but effective way to manage strong authentication to higher levels.
+ 
+ 
+-------
+License
+-------
+This code is released under BSD license (see License.txt for details) and contains other OSS licensed code.
