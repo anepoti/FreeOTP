@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>otpd.business</artifactId>
+	<packaging>jar</packaging>
+
+	<name>${project.artifactId}-${project.version}</name>
+
+	<parent>
+		<artifactId>otpd.module</artifactId>
+		<groupId>otpd</groupId>
+		<version>1.0</version>
+	</parent>
+
+	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<inherited>true</inherited>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<!-- Turn resources filtering -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<!-- specify UTF-8, ISO-8859-1 or any other file encoding -->
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!-- Turn remote-resources -->
+			<plugin>
+				<artifactId>maven-remote-resources-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>bundle</goal>
+						</goals>
+						<configuration>
+							<includes>
+								<include>*config/idm/*.xml</include>
+								<include>**/*.properties</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<!-- Instructing the resources plugin to filter certain directories -->
+		<filters>
+			<filter>../otpd.environment.filters/${env}/otpd-modules-${env}.properties</filter>
+		</filters>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/idm*/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/spring*/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+	<!-- Project dependencies-->
+	<dependencies>
+		<!--  picketlink IDM -->
+		<dependency>
+			<groupId>org.picketlink.idm</groupId>
+			<artifactId>picketlink-idm-core</artifactId>
+			<version>1.1.1.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.picketlink.idm</groupId>
+			<artifactId>picketlink-idm-ldap</artifactId>
+			<version>1.1.1.GA</version>
+		</dependency>
+	</dependencies>
+</project>

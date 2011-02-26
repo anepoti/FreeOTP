@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<context:annotation-config />
+
+	<!-- HOTP Services  -->
+	<bean id="hMacOTPAlgorithmFactory" class="otpd.idm.service.impl.HMacOTPAlgorithmFactory" />
+
+	<bean id="hMacOTPService" class="otpd.idm.service.impl.HMacOTPService">
+		<property name="hMacOTPAlgorithmFactory" ref="hMacOTPAlgorithmFactory" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<bean id="hotp" class="otpd.algorithm.HMacOTPEventValidator">
+		<property name="startMovingFactor" value="${startMovingFactor}" />
+		<property name="resyncWindow" value="${resyncWindow}" />
+		<property name="resyncOnValidate" value="${resyncOnValidate}" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<bean id="totp" class="otpd.algorithm.HMacOTPTimeValidator">
+		<property name="timeStepWindow" value="${timeStepWindow}" />
+		<property name="resyncOnValidate" value="${resyncOnValidate}" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<bean id="ocra" class="otpd.algorithm.HMacOTPOcraValidator">
+		<property name="userService" ref="userService" />
+	</bean>
+
+
+	<!-- scripts executor  -->
+	<bean id="runtimeExecutor" class="otpd.script.RuntimeExecutor">
+		<property name="timeout" value="${runtimeExecutorTimeout}" />
+		<property name="command" value="${runtimeExecutorCommand}" />
+	</bean>
+
+	<!-- IDM Services  -->
+	<bean id="otpIdentitySessionFactory" class="otpd.idm.service.OtpdSessionFactory"
+		scope="singleton" init-method="init">
+		<property name="otpdIdmConfig" value="${otpdIdmConfig}" />
+	</bean>
+
+	<bean id="userService" class="otpd.idm.service.impl.UserServiceImpl">
+		<property name="identityIdmRealm" value="${identityIdmRealmId}" />
+		<property name="idAttributeName" value="${idAttributeName}" />
+	
+		<property name="userStrategyContext" ref="userStrategyContext" />
+		<property name="otpIdentitySessionFactory" ref="otpIdentitySessionFactory" />
+	</bean>
+
+	<!-- OTPState file writer strategy  -->
+	<bean id="remoteFileStrategy" class="otpd.idm.service.strategy.synch.RuntimeStateStrategy">
+		<property name="executor" ref="runtimeExecutor" />
+	</bean>
+
+	<bean id="localFileStrategy" class="otpd.idm.service.strategy.synch.FileStateStrategy">
+		<property name="otpFileFullPath" value="${otpstate.path}" />
+	</bean>
+
+	<bean id="ldapStrategy" class="otpd.idm.service.strategy.synch.LdapStateStrategy">
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<bean id="strategyContext" class="otpd.idm.service.strategy.synch.StateStrategyContext">
+		<property name="otpStateStrategy" ref="${otpStateStrategy}" />
+	</bean>
+	
+	<bean id="defaultUserCheckerStrategy" class="otpd.idm.service.strategy.user.DefaultUserCheckerStreategy">
+	</bean>
+	
+	<bean id="userStrategyContext" class="otpd.idm.service.strategy.user.UserCheckerStrategyContext">
+		<property name="userCheckerStrategy" ref="defaultUserCheckerStrategy" />
+	</bean>
+</beans>
